@@ -1,14 +1,8 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 28, 2020, 9:06:34 PM
-    Author     : Ramesh Godara
-*/
+
 .parent {
-    -fx-background-color: #fff
+    -fx-background-color: #FFB7CE
+
+
 }
 .sidebar {
     -fx-background-color: gray
@@ -17,7 +11,7 @@ and open the template in the editor.
     -fx-background-color: transparent
 }
 .bt:hover {
-    -fx-background-color: darkseagreen 
+    -fx-background-color: #C68EA0
 }
 .box {
     

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -8,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1350.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPanelController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1350.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPanelController">
    <left>
-      <VBox prefHeight="601.0" prefWidth="160.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="601.0" prefWidth="160.0" style="-fx-background-color: #E2A3B7;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addPurchase" mnemonicParsing="false" onAction="#loadHomeView" prefHeight="30.0" prefWidth="189.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" textAlignment="JUSTIFY" visible="false">
                <VBox.margin>
@@ -25,99 +26,71 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="home" mnemonicParsing="false" onAction="#loadHomeView" prefHeight="30.0" prefWidth="173.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Home" textAlignment="JUSTIFY">
+            <Button fx:id="home" mnemonicParsing="false" onAction="#loadHomeView" prefHeight="30.0" prefWidth="173.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" text="Home" textAlignment="JUSTIFY">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@mainpanel.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
             </Button>
-            <Button fx:id="page01" mnemonicParsing="false" onAction="#loadPage01View" prefHeight="30.0" prefWidth="172.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 01" textAlignment="JUSTIFY">
+            <Button fx:id="page01" mnemonicParsing="false" onAction="#loadPage01View" prefHeight="30.0" prefWidth="172.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" text="Page 01" textAlignment="JUSTIFY">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@mainpanel.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
             </Button>
-            <Button fx:id="page02" mnemonicParsing="false" onAction="#loadPage02View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 02" textAlignment="JUSTIFY">
+            <Button fx:id="page02" mnemonicParsing="false" onAction="#loadPage02View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" text="Page 02" textAlignment="JUSTIFY">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@mainpanel.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
             </Button>
-            <Button fx:id="page03" mnemonicParsing="false" onAction="#loadPage03View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 03" textAlignment="JUSTIFY">
+            <Button fx:id="page03" mnemonicParsing="false" onAction="#loadPage03View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" text="Page 03" textAlignment="JUSTIFY">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@mainpanel.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
             </Button>
-            <Button fx:id="page04" mnemonicParsing="false" onAction="#loadPage04View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 04" textAlignment="JUSTIFY">
+            <Button fx:id="page04" mnemonicParsing="false" onAction="#loadPage04View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" text="Page 04" textAlignment="JUSTIFY">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Button>
-            <Button fx:id="page05" mnemonicParsing="false" onAction="#loadPage05View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 05" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="page06" mnemonicParsing="false" onAction="#loadPage06View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 06" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="page07" mnemonicParsing="false" onAction="#loadPage07View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 07" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="page08" mnemonicParsing="false" onAction="#loadPage08View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 08" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="page09" mnemonicParsing="false" onAction="#loadPage09View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 09" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="page10" mnemonicParsing="false" onAction="#loadPage10View" prefHeight="30.0" prefWidth="168.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Page 10" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+               <stylesheets>
+                  <URL value="@mainpanel.css" />
+                  <URL value="@style.css" />
+               </stylesheets>
             </Button>
          </children>
       </VBox>
    </left>
    <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="1360.0" style="-fx-background-color: #2b2a26;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="1463.0" style="-fx-background-color: #C68EA0;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="logout" mnemonicParsing="false" onAction="#close" prefHeight="18.0" prefWidth="74.0" style="-fx-text-fill: #f0f0f0;" styleClass="bt" stylesheets="@mainpanel.css" text="Log Out" textAlignment="JUSTIFY">
                <font>
@@ -127,7 +100,7 @@
                   <Insets />
                </opaqueInsets>
                <HBox.margin>
-                  <Insets right="4.0" />
+                  <Insets right="7.0" />
                </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -135,11 +108,12 @@
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets right="5.0" />
-         </BorderPane.margin></HBox>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="108.0" prefWidth="1190.0" />
             <HBox prefHeight="244.0" prefWidth="1190.0" />

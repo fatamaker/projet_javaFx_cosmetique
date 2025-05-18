@@ -34,6 +34,8 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private BorderPane borderPane;
+    
+    public static BorderPane staticBorderPane;
 
     private List<Button> menus;
 
@@ -46,14 +48,15 @@ public class MainPanelController implements Initializable {
     @FXML
     private LineChart<?, ?> chartReceipt;
 
-    /**
-     * Initializes the controller class.
-     */
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    	 staticBorderPane = borderPane;
 
     }
 
+    
+    
     private void changeButtonBackground(ActionEvent e) {
         Iterator<Button> iteratorMenus = menus.iterator();
 
@@ -164,9 +167,24 @@ public class MainPanelController implements Initializable {
         changeButtonBackground(e);
     }
 
+	/*
+	 * @FXML private void loadHomeView(ActionEvent e) { loadFXML("HomeView");
+	 * changeButtonBackground(e); }
+	 */
+    
+   
     @FXML
     private void loadHomeView(ActionEvent e) {
-        loadFXML("HomeView");
-        changeButtonBackground(e);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeView.fxml"));
+            Parent home = loader.load();
+            borderPane.setCenter(home);
+            changeButtonBackground(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
 }
+
+
