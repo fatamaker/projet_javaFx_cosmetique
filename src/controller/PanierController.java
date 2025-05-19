@@ -1,6 +1,7 @@
 package controller;
 
 import application.models.*;
+import helper.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,14 @@ public class PanierController {
     @FXML
     public void initialize() {
         afficherPanier();
+        
+        Utilisateur utilisateur = SessionManager.getUtilisateurConnecte();
+        if (utilisateur != null) {
+            nomClientField.setText(utilisateur.getNom());
+                       emailField.setText(utilisateur.getEmail());
+                       nomClientField.setEditable(false);
+                       emailField.setEditable(false);
+        }
 
         passerCommandeButton.setOnAction(e -> {
             passerCommande();
@@ -57,30 +66,43 @@ public class PanierController {
     }
 
     private void passerCommande() {
-        String nomClient = nomClientField.getText();
+        Utilisateur utilisateur = SessionManager.getUtilisateurConnecte();
         String adresse = adresseField.getText();
         String telephone = telephoneField.getText();
-        String email = emailField.getText();
 
-        if (nomClient.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
-            System.out.println("Veuillez remplir tous les champs du client.");
+        if (utilisateur == null) {
+            System.out.println("Utilisateur non authentifié");
             return;
         }
+
+        // Tu peux récupérer les infos client depuis l'utilisateur connecté au lieu des TextField,
+        // ou vérifier qu'ils correspondent.
 
         List<LigneCommande> lignes = new ArrayList<>();
         for (Map.Entry<Produit, Integer> entry : Panier.getInstance().getDetails().entrySet()) {
             lignes.add(new LigneCommande(entry.getKey(), entry.getValue()));
         }
 
-		
-		  Commande commande = new Commande(nomClient, adresse, telephone, email,
-		  Panier.getInstance().getSousTotal(), lignes); CommandeM commandeM = new
-		  CommandeM();
-		  
-		  boolean success = commandeM.ajouterCommande(commande); if (success) {
-		  System.out.println("Commande passée avec succès !");
-		  Panier.getInstance().viderPanier(); afficherPanier(); // rafraîchir affichage
-		  } else { System.out.println("Erreur lors de la commande."); }
-		 
+        Commande commande = new Commande(
+            utilisateur.getId(),                  // id utilisateur connecté
+            utilisateur.getNom(),                 // nom
+            adresse,             // adresse
+            telephone,           // téléphone
+            utilisateur.getEmail(),               // email
+            Panier.getInstance().getSousTotal(),
+            lignes
+        );
+
+        CommandeM commandeM = new CommandeM();
+        boolean success = commandeM.ajouterCommande(commande);
+
+        if (success) {
+            System.out.println("Commande passée avec succès !");
+            Panier.getInstance().viderPanier();
+            afficherPanier(); // rafraîchir affichage
+        } else {
+            System.out.println("Erreur lors de la commande.");
+        }
     }
+
 }

@@ -5,6 +5,8 @@ import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,9 +19,9 @@ public class CommandeM {
 
     public boolean ajouterCommande(Commande commande) {
         try {
-        	String insertCommande = "INSERT INTO commande( nom_client, adresse, telephone, email, total) VALUES ( ?, ?, ?, ?, ?)";
+        	String insertCommande = "INSERT INTO commande(utilisateur_id ,nom_client, adresse, telephone, email, total) VALUES (?, ?, ?, ?, ?, ?)";
         	PreparedStatement psCommande = connection.prepareStatement(insertCommande, Statement.RETURN_GENERATED_KEYS);
-        	//psCommande.setInt(1, commande.getUtilisateurId());
+        	psCommande.setInt(1, commande.getUtilisateurId());
         	psCommande.setString(2, commande.getNomClient());
         	psCommande.setString(3, commande.getAdresse());
         	psCommande.setString(4, commande.getTelephone());
@@ -50,4 +52,128 @@ public class CommandeM {
             return false;
         }
     }
+    
+    public List<Commande> getCommandesParUtilisateur(int utilisateurId) {
+        List<Commande> commandes = new ArrayList<>();
+        String query = "SELECT * FROM commande WHERE utilisateur_id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, utilisateurId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int commandeId = rs.getInt("id");
+
+                List<LigneCommande> lignes = getLignesParCommande(commandeId);
+
+                Commande commande = new Commande(
+                    rs.getInt("utilisateur_id"),
+                    rs.getString("nom_client"),
+                    rs.getString("adresse"),
+                    rs.getString("telephone"),
+                    rs.getString("email"),
+                    rs.getDouble("total"),
+                    lignes
+                );
+                commande.setId(commandeId); // important
+
+                commandes.add(commande);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return commandes;
+    }
+
+    // Méthode pour récupérer les lignes de commande d'une commande
+    private List<LigneCommande> getLignesParCommande(int commandeId) {
+        List<LigneCommande> lignes = new ArrayList<>();
+        String sql = "SELECT * FROM ligne_commande WHERE commande_id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, commandeId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int produitId = rs.getInt("produit");
+                int quantite = rs.getInt("quantite");
+
+                Produit produit = getProduitById(produitId); // méthode à écrire
+
+                if (produit != null) {
+                    LigneCommande ligne = new LigneCommande(produit, quantite);
+                    lignes.add(ligne);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lignes;
+    }
+    
+    private Produit getProduitById(int id) {
+        Produit produit = null;
+        String sql = "SELECT * FROM produit WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int categorieId = rs.getInt("categorie_id");
+
+                Categorie categorie = getCategorieById(categorieId); // Méthode à créer
+
+                produit = new Produit(
+                    rs.getInt("id"),
+                    rs.getString("nom"),
+                    rs.getString("description"),
+                    rs.getDouble("prix"),
+                    rs.getInt("stock"),
+                    categorie,
+                    rs.getString("image")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produit;
+    }
+
+    
+    private Categorie getCategorieById(int id) {
+        Categorie categorie = null;
+        String sql = "SELECT * FROM categorie WHERE id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                categorie = new Categorie(
+                    rs.getInt("id"),
+                    rs.getString("nom")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categorie;
+    }
+
+
+
+
 }

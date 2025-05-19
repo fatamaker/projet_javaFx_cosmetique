@@ -35,7 +35,7 @@ public class MainPanelController implements Initializable {
     @FXML private Button page01;
     @FXML private Button page02;
     @FXML private Button Panier;
-    @FXML private Button page04;
+    @FXML private Button HistoriqueCommande;
     @FXML private Button page05;
     @FXML private Button page06;
     @FXML private Button page07;
@@ -73,7 +73,7 @@ public class MainPanelController implements Initializable {
         menuButtons.add(page01);
         menuButtons.add(page02);
         menuButtons.add(Panier);
-        menuButtons.add(page04);
+        menuButtons.add(HistoriqueCommande);
         menuButtons.add(page05);
         menuButtons.add(page06);
         menuButtons.add(page07);
@@ -105,7 +105,7 @@ public class MainPanelController implements Initializable {
             // USER sees Home, Page03 and Page04 buttons
             setButtonVisibility(home, true);
             setButtonVisibility(Panier, true);
-            setButtonVisibility(page04, true);
+            setButtonVisibility(HistoriqueCommande, true);
             LOGGER.info("Configuration du menu pour USER terminée");
         } else {
             LOGGER.warning("Rôle inconnu: " + currentRole);
@@ -167,7 +167,7 @@ public class MainPanelController implements Initializable {
         if ("ADMIN".equals(currentRole)) {
             return viewName.matches("Page01View|Page02View");
         } else if ("USER".equals(currentRole)) {
-            return viewName.matches("HomeView|Page03View|Page04View|Panier");
+            return viewName.matches("HomeView|Page03View|HistoriqueCommande|Panier");
         }
         return false;
     }
@@ -269,7 +269,7 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private void loadPage04View(ActionEvent e) {
-        loadView("Page04View", e);
+        loadView("HistoriqueCommande", e);
     }
 
     @FXML

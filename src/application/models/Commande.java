@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Commande {
     private int id;
-    //private int utilisateurId; 
+    private int utilisateurId; 
     private String nomClient;
     private String adresse;
     private String telephone;
@@ -14,8 +14,8 @@ public class Commande {
     private List<LigneCommande> lignes;
 
    
-    public Commande( String nomClient, String adresse, String telephone, String email, double total, List<LigneCommande> lignes) {
-        //this.utilisateurId = utilisateurId;
+    public Commande(int utilisateurId, String nomClient, String adresse, String telephone, String email, double total, List<LigneCommande> lignes) {
+        this.utilisateurId = utilisateurId;
         this.nomClient = nomClient;
         this.adresse = adresse;
         this.telephone = telephone;
@@ -25,12 +25,12 @@ public class Commande {
     }
 
    
-	/*
-	 * public int getUtilisateurId() { return utilisateurId; }
-	 * 
-	 * public void setUtilisateurId(int utilisateurId) { this.utilisateurId =
-	 * utilisateurId; }
-	 */
+	
+	  public int getUtilisateurId() { return utilisateurId; }
+	  
+	  public void setUtilisateurId(int utilisateurId) { this.utilisateurId =
+	  utilisateurId; }
+	 
 
     
 	public int getId() {

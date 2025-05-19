@@ -7,6 +7,8 @@ package controller;
 
 import database.DbConnection;
 import helper.AlertHelper;
+import helper.SessionManager;
+
 import java.io.IOException;
 
 import java.net.URL;
@@ -28,6 +30,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import application.models.Utilisateur;
 
 /**
  *
@@ -72,10 +76,21 @@ public class LoginController implements Initializable {
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    // SET THE ROLE BEFORE LOADING MAIN PANEL
                     String userRole = rs.getString("role");
                     MainPanelController.setCurrentRole(userRole);
-                    
+
+                    Utilisateur utilisateur = new Utilisateur(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                       
+                       
+                    );
+                    SessionManager.setUtilisateurConnecte(utilisateur);
+
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
 
@@ -84,7 +99,8 @@ public class LoginController implements Initializable {
                     stage.setScene(scene);
                     stage.setTitle(userRole + " Panel");
                     stage.show();
-                } else {
+                }
+else {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, window, "Error",
                             "Invalid username or password.");
                 }
