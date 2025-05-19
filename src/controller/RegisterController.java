@@ -75,13 +75,15 @@ public class RegisterController implements Initializable {
             try {
                 PreparedStatement ps;
                 stmt = con.createStatement();
-                String query = "insert into users (first_name,last_name,email,user_name,password)values (?,?,?,?,?)";
+                String query = "insert into users (first_name,last_name,email,user_name,password,role)values (?,?,?,?,?,?)";
                 ps = con.prepareStatement(query);
                 ps.setString(1, firstName.getText());
                 ps.setString(2, lastName.getText());
                 ps.setString(3, email.getText());
                 ps.setString(4, username.getText());
                 ps.setString(5, password.getText());
+                ps.setString(6, "USER"); // rôle par défaut
+
                 if (ps.executeUpdate() > 0) {
                     this.clearForm();
                     AlertHelper.showAlert(Alert.AlertType.INFORMATION, window, "Information",
@@ -205,4 +207,5 @@ public class RegisterController implements Initializable {
         stage.setTitle("User Login");
         stage.show();
     }
+
 }

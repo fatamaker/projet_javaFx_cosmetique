@@ -17,14 +17,14 @@ public class CommandeM {
 
     public boolean ajouterCommande(Commande commande) {
         try {
-            String insertCommande = "INSERT INTO commande(nom_client, adresse, telephone, email, total) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement psCommande = connection.prepareStatement(insertCommande, Statement.RETURN_GENERATED_KEYS);
-            psCommande.setString(1, commande.getNomClient());
-            psCommande.setString(2, commande.getAdresse());
-            psCommande.setString(3, commande.getTelephone());
-            psCommande.setString(4, commande.getEmail());
-            psCommande.setDouble(5, commande.getTotal());
-
+        	String insertCommande = "INSERT INTO commande( nom_client, adresse, telephone, email, total) VALUES ( ?, ?, ?, ?, ?)";
+        	PreparedStatement psCommande = connection.prepareStatement(insertCommande, Statement.RETURN_GENERATED_KEYS);
+        	//psCommande.setInt(1, commande.getUtilisateurId());
+        	psCommande.setString(2, commande.getNomClient());
+        	psCommande.setString(3, commande.getAdresse());
+        	psCommande.setString(4, commande.getTelephone());
+        	psCommande.setString(5, commande.getEmail());
+        	psCommande.setDouble(6, commande.getTotal());
             psCommande.executeUpdate();
 
             ResultSet rs = psCommande.getGeneratedKeys();

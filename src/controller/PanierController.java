@@ -72,16 +72,15 @@ public class PanierController {
             lignes.add(new LigneCommande(entry.getKey(), entry.getValue()));
         }
 
-        Commande commande = new Commande(nomClient, adresse, telephone, email, Panier.getInstance().getSousTotal(), lignes);
-        CommandeM commandeM = new CommandeM();
-
-        boolean success = commandeM.ajouterCommande(commande);
-        if (success) {
-            System.out.println("Commande passée avec succès !");
-            Panier.getInstance().viderPanier();
-            afficherPanier(); // rafraîchir affichage
-        } else {
-            System.out.println("Erreur lors de la commande.");
-        }
+		
+		  Commande commande = new Commande(nomClient, adresse, telephone, email,
+		  Panier.getInstance().getSousTotal(), lignes); CommandeM commandeM = new
+		  CommandeM();
+		  
+		  boolean success = commandeM.ajouterCommande(commande); if (success) {
+		  System.out.println("Commande passée avec succès !");
+		  Panier.getInstance().viderPanier(); afficherPanier(); // rafraîchir affichage
+		  } else { System.out.println("Erreur lors de la commande."); }
+		 
     }
 }

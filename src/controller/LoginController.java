@@ -8,6 +8,7 @@ package controller;
 import database.DbConnection;
 import helper.AlertHelper;
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,12 +60,11 @@ public class LoginController implements Initializable {
 
     @FXML
     private void login() throws Exception {
-
         if (this.isValidated()) {
             PreparedStatement ps;
             ResultSet rs;
 
-            String query = "select * from users WHERE user_name = ? and password = ?";
+            String query = "SELECT * FROM users WHERE user_name = ? AND password = ?";
             try {
                 ps = con.prepareStatement(query);
                 ps.setString(1, username.getText());
@@ -70,29 +72,27 @@ public class LoginController implements Initializable {
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-
+                    // SET THE ROLE BEFORE LOADING MAIN PANEL
+                    String userRole = rs.getString("role");
+                    MainPanelController.setCurrentRole(userRole);
+                    
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.close();
 
                     Parent root = FXMLLoader.load(getClass().getResource("/view/MainPanelView.fxml"));
-
                     Scene scene = new Scene(root);
-
                     stage.setScene(scene);
-                    stage.setTitle("Admin Panel");
+                    stage.setTitle(userRole + " Panel");
                     stage.show();
-
                 } else {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, window, "Error",
-                            "Invalid username and password.");
-                    username.requestFocus();
+                            "Invalid username or password.");
                 }
             } catch (SQLException ex) {
-                System.out.println(ex);
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-
     private boolean isValidated() {
 
         window = loginButton.getScene().getWindow();

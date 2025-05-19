@@ -4,36 +4,35 @@ import java.util.List;
 import java.util.Map;
 
 public class Commande {
-	private int id;
+    private int id;
+    //private int utilisateurId; 
     private String nomClient;
     private String adresse;
     private String telephone;
     private String email;
     private double total;
     private List<LigneCommande> lignes;
-	
-	public Commande(int id, String nomClient, String adresse, String telephone, String email, double total,
-			List<LigneCommande> lignes) {
-		super();
-		this.id = id;
-		this.nomClient = nomClient;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.email = email;
-		this.total = total;
-		this.lignes = lignes;
-	}
-	
-	public Commande(String nomClient, String adresse, String telephone, String email, double total,
-			List<LigneCommande> lignes) {
-		super();
-		this.nomClient = nomClient;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.email = email;
-		this.total = total;
-		this.lignes = lignes;
-	}
+
+   
+    public Commande( String nomClient, String adresse, String telephone, String email, double total, List<LigneCommande> lignes) {
+        //this.utilisateurId = utilisateurId;
+        this.nomClient = nomClient;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.email = email;
+        this.total = total;
+        this.lignes = lignes;
+    }
+
+   
+	/*
+	 * public int getUtilisateurId() { return utilisateurId; }
+	 * 
+	 * public void setUtilisateurId(int utilisateurId) { this.utilisateurId =
+	 * utilisateurId; }
+	 */
+
+    
 	public int getId() {
 		return id;
 	}
