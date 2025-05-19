@@ -51,4 +51,19 @@ public class CategorieM {
             e.printStackTrace();
         }
     }
+    
+   
+    
+    public boolean modifierCategorie(Categorie categorie) {
+    	String sql = "UPDATE categorie SET nom = ? WHERE id = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql);) {
+            stmt.setString(1, categorie.getNom());
+            stmt.setInt(2, categorie.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

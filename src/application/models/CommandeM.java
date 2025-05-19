@@ -84,7 +84,7 @@ public class CommandeM {
                 	    dateCommande
                 	);
 
-                commande.setId(commandeId); // important
+                commande.setId(commandeId); 
 
                 commandes.add(commande);
             }
@@ -96,7 +96,7 @@ public class CommandeM {
         return commandes;
     }
 
-    // Méthode pour récupérer les lignes de commande d'une commande
+   
     private List<LigneCommande> getLignesParCommande(int commandeId) {
         List<LigneCommande> lignes = new ArrayList<>();
         String sql = "SELECT * FROM ligne_commande WHERE commande_id = ?";
@@ -110,7 +110,7 @@ public class CommandeM {
                 int produitId = rs.getInt("produit_id");
                 int quantite = rs.getInt("quantite");
 
-                Produit produit = getProduitById(produitId); // méthode à écrire
+                Produit produit = getProduitById(produitId); 
 
                 if (produit != null) {
                     LigneCommande ligne = new LigneCommande(produit, quantite);
@@ -137,7 +137,7 @@ public class CommandeM {
             if (rs.next()) {
                 int categorieId = rs.getInt("categorie");
 
-                Categorie categorie = getCategorieById(categorieId); // Méthode à créer
+                Categorie categorie = getCategorieById(categorieId); 
 
                 produit = new Produit(
                     rs.getInt("id"),

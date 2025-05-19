@@ -26,18 +26,13 @@ public class MainPanelController implements Initializable {
     
     public static BorderPane staticBorderPane;
     
-    // Boutons du menu
+  
     @FXML private Button home;
     @FXML private Button page01;
     @FXML private Button page02;
     @FXML private Button page03;
     @FXML private Button page04;
-    @FXML private Button page05;
-    @FXML private Button page06;
-    @FXML private Button page07;
-    @FXML private Button page08;
-    @FXML private Button page09;
-    @FXML private Button page10;
+    
     
     private List<Button> menuButtons;
     private static String currentRole;
@@ -48,14 +43,14 @@ public class MainPanelController implements Initializable {
         staticBorderPane = borderPane;
         initializeMenuButtons();
         configureMenuBasedOnRole();
-        loadDefaultView(); // Charge la vue par défaut selon le rôle
+        loadDefaultView(); 
     }
     
     private void loadDefaultView() {
         if ("ADMIN".equals(currentRole)) {
-            loadView("Page01View", null); // Charge Page01 par défaut pour ADMIN
+            loadView("Page01View", null); 
         } else if ("USER".equals(currentRole)) {
-            loadView("HomeView", null); // Charge Home par défaut pour USER
+            loadView("HomeView", null); 
         }
     }
     
@@ -70,12 +65,7 @@ public class MainPanelController implements Initializable {
         menuButtons.add(page02);
         menuButtons.add(page03);
         menuButtons.add(page04);
-        menuButtons.add(page05);
-        menuButtons.add(page06);
-        menuButtons.add(page07);
-        menuButtons.add(page08);
-        menuButtons.add(page09);
-        menuButtons.add(page10);
+       
     }
     
     private void configureMenuBasedOnRole() {
@@ -84,7 +74,7 @@ public class MainPanelController implements Initializable {
             return;
         }
         
-        // Masque tous les boutons d'abord
+        
         menuButtons.forEach(button -> {
             if (button != null) {
                 button.setVisible(false);
@@ -93,13 +83,13 @@ public class MainPanelController implements Initializable {
         });
         
         if ("ADMIN".equals(currentRole)) {
-            // ADMIN voit seulement Page01 et Page02
+          
             setButtonVisibility(page01, true);
             setButtonVisibility(page02, true);
             LOGGER.info("Configuration du menu pour ADMIN terminée");
         } 
         else if ("USER".equals(currentRole)) {
-            // USER voit seulement Home, Page03 et Page04
+           
             setButtonVisibility(home, true);
             setButtonVisibility(page03, true);
             setButtonVisibility(page04, true);
@@ -143,7 +133,7 @@ public class MainPanelController implements Initializable {
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Erreur lors du chargement de la vue: " + viewName, ex);
             showErrorAlert("Erreur lors du chargement de la page: " + ex.getMessage());
-            loadDefaultView(); // Recharge la vue par défaut en cas d'erreur
+            loadDefaultView(); 
         }
     }
     
@@ -163,8 +153,8 @@ public class MainPanelController implements Initializable {
         menuButtons.forEach(button -> {
             if (button != null && button.isVisible()) {
                 String style = button == activeButton 
-                    ? "-fx-text-fill:#f0f0f0;-fx-background-color:#2b2a26;" 
-                    : "-fx-text-fill:#f0f0f0;-fx-background-color:#404040;";
+                    ? "-fx-text-fill:#f0f0f0;-fx-background-color:#C68EA0;" 
+                    : "-fx-text-fill:#f0f0f0;-fx-background-color:#E2A3B7;";
                 button.setStyle(style);
             }
         });
@@ -176,7 +166,7 @@ public class MainPanelController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Vous n'avez pas la permission d'accéder à cette page.");
         alert.showAndWait();
-        loadDefaultView(); // Retour à la vue par défaut
+        loadDefaultView(); 
     }
     
     private void showErrorAlert(String message) {
@@ -187,7 +177,7 @@ public class MainPanelController implements Initializable {
         alert.showAndWait();
     }
 
-    // Méthodes de navigation
+    
     @FXML private void loadHomeView(ActionEvent e) { 
         if ("USER".equals(currentRole)) {
             loadView("HomeView", e); 
@@ -203,7 +193,7 @@ public class MainPanelController implements Initializable {
     @FXML
     private void close() throws IOException {
         Stage stage = (Stage) borderPane.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/role_selection.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Connexion");
         stage.getIcons().add(new Image("/asset/icon.png"));

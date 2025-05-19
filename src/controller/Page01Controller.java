@@ -172,6 +172,7 @@ public class Page01Controller implements Initializable {
                 selected.setPrix(prix);
                 selected.setStock(stock);
                 selected.setCategorie(categorieChoiceBox.getValue());
+                selected.setImagePath(selectedImagePath);
 
                 if (manager.update(selected)) {
                     data.setAll(manager.findAll());

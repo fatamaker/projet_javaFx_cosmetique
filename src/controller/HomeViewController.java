@@ -15,8 +15,8 @@ public class HomeViewController {
     private FlowPane productsFlowPane;
 
     public void initialize() {
-        ProduitM produitM = new ProduitM(); // create an instance
-        List<Produit> produits = produitM.findAll(); // call the method
+        ProduitM produitM = new ProduitM(); 
+        List<Produit> produits = produitM.findAll(); 
 
         for (Produit produit : produits) {
             try {

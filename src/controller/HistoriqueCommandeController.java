@@ -38,7 +38,7 @@ public class HistoriqueCommandeController {
             colTelephone.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getTelephone()));
             colTotal.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getTotal()).asObject());
 
-            // ➕ Ajouter gestion de clic sur une ligne
+           
             tableCommandes.setRowFactory(tv -> {
                 TableRow<Commande> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
@@ -79,7 +79,7 @@ public class HistoriqueCommandeController {
         alert.setTitle("Détails de la commande");
         alert.setHeaderText("Commande #" + commande.getId());
         alert.setContentText(details.toString());
-        alert.getDialogPane().setPrefWidth(400); // pour meilleure lisibilité
+        alert.getDialogPane().setPrefWidth(400); 
         alert.showAndWait();
     }
 

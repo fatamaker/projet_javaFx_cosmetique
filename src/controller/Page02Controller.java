@@ -20,6 +20,7 @@ public class Page02Controller implements Initializable {
 
     private final ObservableList<Categorie> categories = FXCollections.observableArrayList();
     private final CategorieM categorieM = new CategorieM();
+    private Categorie selectedCategorie = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -27,6 +28,14 @@ public class Page02Controller implements Initializable {
         nomCol.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
         categorieTable.setItems(categories);
         chargerCategories();
+
+        // Remplir le champ nomField lors de la sélection d'une ligne
+        categorieTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                selectedCategorie = newSelection;
+                nomField.setText(selectedCategorie.getNom());
+            }
+        });
     }
 
     public void chargerCategories() {
@@ -40,6 +49,7 @@ public class Page02Controller implements Initializable {
             categorieM.ajouterCategorie(nom);
             chargerCategories();
             nomField.clear();
+            selectedCategorie = null;
         }
     }
 
@@ -48,6 +58,31 @@ public class Page02Controller implements Initializable {
         if (selected != null) {
             categorieM.supprimerCategorie(selected.getId());
             chargerCategories();
+            nomField.clear();
+            selectedCategorie = null;
         }
+    }
+
+    public void modifierCategorie() {
+        if (selectedCategorie != null) {
+            String nouveauNom = nomField.getText();
+            if (!nouveauNom.isEmpty()) {
+                selectedCategorie.setNom(nouveauNom);
+                categorieM.modifierCategorie(selectedCategorie);
+                chargerCategories();
+                nomField.clear();
+                selectedCategorie = null;
+            }
+        } else {
+            showAlert("Veuillez sélectionner une catégorie à modifier.");
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Avertissement");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

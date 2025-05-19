@@ -76,8 +76,7 @@ public class PanierController {
             return;
         }
 
-        // Tu peux récupérer les infos client depuis l'utilisateur connecté au lieu des TextField,
-        // ou vérifier qu'ils correspondent.
+     
 
         List<LigneCommande> lignes = new ArrayList<>();
         for (Map.Entry<Produit, Integer> entry : Panier.getInstance().getDetails().entrySet()) {
@@ -87,14 +86,14 @@ public class PanierController {
         LocalDateTime dateCommande = LocalDateTime.now(); 
 
         Commande commande = new Commande(
-            utilisateur.getId(),               // id utilisateur connecté
-            utilisateur.getNom(),              // nom
-            adresse,                           // adresse
-            telephone,                         // téléphone
-            utilisateur.getEmail(),            // email
+            utilisateur.getId(),               
+            utilisateur.getNom(),             
+            adresse,                          
+            telephone,                         
+            utilisateur.getEmail(),           
             Panier.getInstance().getSousTotal(),
             lignes,
-            dateCommande                       // 👉 Passer la date au constructeur
+            dateCommande                      
         );
 
         CommandeM commandeM = new CommandeM();

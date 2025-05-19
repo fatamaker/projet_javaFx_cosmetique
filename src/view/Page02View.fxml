@@ -32,6 +32,7 @@
     <HBox prefHeight="31.0" prefWidth="592.0" spacing="10">
         <TextField fx:id="nomField" promptText="Nom de la catégorie" />
         <Button onAction="#ajouterCategorie" style="-fx-background-color: #4CAF50;" text="Ajouter" />
+        <Button text="Modifier" onAction="#modifierCategorie" />
         <Button onAction="#supprimerCategorie" style="-fx-background-color: #F44336;" text="Supprimer" />
             <VBox.margin>
                <Insets left="400.0" top="100.0" />
