@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.PanierController"
+      style="-fx-padding: 30; -fx-background-color: #f9f9f9;">
+
+    <!-- Titre -->
+    <Label text="Votre Panier"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <!-- Liste des produits dans le panier -->
+    <VBox fx:id="panierVBox"
+          spacing="10"
+          prefHeight="200"
+          style="-fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-padding: 10; -fx-background-color: #ffffff; -fx-background-radius: 5;"/>
+
+    <!-- Total -->
+    <Label fx:id="totalLabel"
+           text="Total: 0 DT"
+           style="-fx-font-size: 16px; -fx-text-fill: #27ae60;"/>
+
+    <!-- Informations client -->
+    <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #ffffff; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.2, 0, 2);">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Nom Client:" style="-fx-font-size: 14px; -fx-pref-width: 100;"/>
+            <TextField fx:id="nomClientField" prefWidth="250"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Adresse:" style="-fx-font-size: 14px; -fx-pref-width: 100;"/>
+            <TextField fx:id="adresseField" prefWidth="250"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Téléphone:" style="-fx-font-size: 14px; -fx-pref-width: 100;"/>
+            <TextField fx:id="telephoneField" prefWidth="250"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Email:" style="-fx-font-size: 14px; -fx-pref-width: 100;"/>
+            <TextField fx:id="emailField" prefWidth="250"/>
+        </HBox>
+    </VBox>
+
+    <!-- Bouton Passer la commande -->
+    <Button fx:id="passerCommandeButton" text="Passer la commande"
+            style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;"/>
+
+</VBox>

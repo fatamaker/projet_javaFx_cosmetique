@@ -121,7 +121,7 @@ public class MainPanelController implements Initializable {
 
     @FXML
     private void loadPage03View(ActionEvent e) {
-        loadFXML("Page03View");
+        loadFXML("Panier");
         changeButtonBackground(e);
     }
 
@@ -186,5 +186,3 @@ public class MainPanelController implements Initializable {
     }
 
 }
-
-
