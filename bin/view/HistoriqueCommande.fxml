@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="462.0" prefWidth="939.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.HistoriqueCommandeController">
+    <top>
+        <Label style="-fx-font-size: 22px; -fx-padding: 15; -fx-font-weight: bold;" text="📜 Historique des Commandes" BorderPane.alignment="CENTER" />
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <TableView fx:id="tableCommandes" prefHeight="400" prefWidth="700" style="-fx-border-color: #ccc; -fx-border-radius: 5; -fx-background-radius: 5;">
+                <columns>
+                    <TableColumn fx:id="colId" prefWidth="60" text="ID" />
+                    <TableColumn fx:id="colNomClient" prefWidth="150" text="Nom Client" />
+                    <TableColumn fx:id="colAdresse" prefWidth="180" text="Adresse" />
+                    <TableColumn fx:id="colTelephone" prefWidth="120" text="Téléphone" />
+                    <TableColumn fx:id="colTotal" prefWidth="100" text="Total (d)" />
+                </columns>
+            <VBox.margin>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="29.0" />
+            </VBox.margin>
+            </TableView>
+
+        
+        </VBox>
+    </center>
+</BorderPane>

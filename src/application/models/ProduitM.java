@@ -89,4 +89,19 @@ public class ProduitM {
             return false;
         }
     }
+    
+    public boolean mettreAJourStock(int produitId, int nouvelleQuantite) {
+        String sql = "UPDATE produit SET stock = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql);) {
+
+            ps.setInt(1, nouvelleQuantite);
+            ps.setInt(2, produitId);
+            ps.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -9,6 +9,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ProduitDetailController {
 
@@ -34,6 +36,12 @@ public class ProduitDetailController {
             int quantite = quantiteSpinner.getValue();
             Panier.getInstance().ajouterProduit(produit, quantite);
             System.out.println("Ajouté au panier: " + produit.getNom() + " x" + quantite);
+         
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Succès");
+            alert.setHeaderText(null);
+            alert.setContentText("Produit ajouté au panier avec succès !");
+            alert.showAndWait();
         });
     }
 

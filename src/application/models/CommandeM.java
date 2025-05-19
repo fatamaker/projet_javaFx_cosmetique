@@ -5,6 +5,7 @@ import database.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -19,7 +20,8 @@ public class CommandeM {
 
     public boolean ajouterCommande(Commande commande) {
         try {
-        	String insertCommande = "INSERT INTO commande(utilisateur_id ,nom_client, adresse, telephone, email, total) VALUES (?, ?, ?, ?, ?, ?)";
+        	String insertCommande = "INSERT INTO commande(utilisateur_id, nom_client, adresse, telephone, email, total, date_commande) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         	PreparedStatement psCommande = connection.prepareStatement(insertCommande, Statement.RETURN_GENERATED_KEYS);
         	psCommande.setInt(1, commande.getUtilisateurId());
         	psCommande.setString(2, commande.getNomClient());
@@ -27,6 +29,8 @@ public class CommandeM {
         	psCommande.setString(4, commande.getTelephone());
         	psCommande.setString(5, commande.getEmail());
         	psCommande.setDouble(6, commande.getTotal());
+        	psCommande.setTimestamp(7, java.sql.Timestamp.valueOf(commande.getDateCommande()));
+
             psCommande.executeUpdate();
 
             ResultSet rs = psCommande.getGeneratedKeys();
@@ -55,7 +59,9 @@ public class CommandeM {
     
     public List<Commande> getCommandesParUtilisateur(int utilisateurId) {
         List<Commande> commandes = new ArrayList<>();
+        
         String query = "SELECT * FROM commande WHERE utilisateur_id = ?";
+        
 
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -64,18 +70,20 @@ public class CommandeM {
 
             while (rs.next()) {
                 int commandeId = rs.getInt("id");
+                LocalDateTime dateCommande = rs.getTimestamp("date_commande").toLocalDateTime();
 
                 List<LigneCommande> lignes = getLignesParCommande(commandeId);
-
                 Commande commande = new Commande(
-                    rs.getInt("utilisateur_id"),
-                    rs.getString("nom_client"),
-                    rs.getString("adresse"),
-                    rs.getString("telephone"),
-                    rs.getString("email"),
-                    rs.getDouble("total"),
-                    lignes
-                );
+                	    rs.getInt("utilisateur_id"),
+                	    rs.getString("nom_client"),
+                	    rs.getString("adresse"),
+                	    rs.getString("telephone"),
+                	    rs.getString("email"),
+                	    rs.getDouble("total"),
+                	    lignes,
+                	    dateCommande
+                	);
+
                 commande.setId(commandeId); // important
 
                 commandes.add(commande);
@@ -99,7 +107,7 @@ public class CommandeM {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int produitId = rs.getInt("produit");
+                int produitId = rs.getInt("produit_id");
                 int quantite = rs.getInt("quantite");
 
                 Produit produit = getProduitById(produitId); // méthode à écrire
@@ -127,7 +135,7 @@ public class CommandeM {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int categorieId = rs.getInt("categorie_id");
+                int categorieId = rs.getInt("categorie");
 
                 Categorie categorie = getCategorieById(categorieId); // Méthode à créer
 
@@ -138,7 +146,7 @@ public class CommandeM {
                     rs.getDouble("prix"),
                     rs.getInt("stock"),
                     categorie,
-                    rs.getString("image")
+                    rs.getString("image_path")
                 );
             }
 

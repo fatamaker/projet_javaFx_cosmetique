@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -83,14 +84,17 @@ public class PanierController {
             lignes.add(new LigneCommande(entry.getKey(), entry.getValue()));
         }
 
+        LocalDateTime dateCommande = LocalDateTime.now(); 
+
         Commande commande = new Commande(
-            utilisateur.getId(),                  // id utilisateur connecté
-            utilisateur.getNom(),                 // nom
-            adresse,             // adresse
-            telephone,           // téléphone
-            utilisateur.getEmail(),               // email
+            utilisateur.getId(),               // id utilisateur connecté
+            utilisateur.getNom(),              // nom
+            adresse,                           // adresse
+            telephone,                         // téléphone
+            utilisateur.getEmail(),            // email
             Panier.getInstance().getSousTotal(),
-            lignes
+            lignes,
+            dateCommande                       // 👉 Passer la date au constructeur
         );
 
         CommandeM commandeM = new CommandeM();
@@ -98,8 +102,22 @@ public class PanierController {
 
         if (success) {
             System.out.println("Commande passée avec succès !");
+            
+            ProduitM produitM = new ProduitM();
+            for (LigneCommande ligne : lignes) {
+                Produit produit = ligne.getProduit();
+                int quantiteCommandee = ligne.getQuantite();
+                int nouveauStock = produit.getStock() - quantiteCommandee;
+                
+                if (nouveauStock >= 0) {
+                    produitM.mettreAJourStock(produit.getId(), nouveauStock);
+                } else {
+                    System.out.println("Stock insuffisant pour le produit : " + produit.getNom());
+                }
+            }
+
             Panier.getInstance().viderPanier();
-            afficherPanier(); // rafraîchir affichage
+            afficherPanier(); 
         } else {
             System.out.println("Erreur lors de la commande.");
         }

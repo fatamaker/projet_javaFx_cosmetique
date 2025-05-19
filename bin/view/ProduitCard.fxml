@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.Color?>
+
+<VBox fx:id="cardContainer"
+      alignment="CENTER"
+      spacing="10"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ProduitCardController"
+      style="-fx-background-color: white;
+             -fx-border-color: #dddddd;
+             -fx-border-radius: 10;
+             -fx-background-radius: 10;
+             -fx-padding: 15;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.3, 0, 4);"
+      prefWidth="200"
+      prefHeight="250">
+
+    <ImageView fx:id="imageView"
+               fitHeight="100"
+               fitWidth="100"
+               style="-fx-background-radius: 10;" />
+
+    <Label fx:id="nomLabel"
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+    <Label fx:id="prixLabel"
+           style="-fx-font-size: 14px; -fx-text-fill: #4CAF50;" />
+
+    <HBox spacing="5" alignment="CENTER">
+        <Text text="Catégorie:" style="-fx-font-size: 12px; -fx-fill: #888888;" />
+        <Label fx:id="categorieLabel"
+               style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
+    </HBox>
+</VBox>

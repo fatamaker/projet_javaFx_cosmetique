@@ -2,6 +2,7 @@ package application.models;
 
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDateTime;
 
 public class Commande {
     private int id;
@@ -14,7 +15,9 @@ public class Commande {
     private List<LigneCommande> lignes;
 
    
-    public Commande(int utilisateurId, String nomClient, String adresse, String telephone, String email, double total, List<LigneCommande> lignes) {
+    private LocalDateTime dateCommande;
+
+    public Commande(int utilisateurId, String nomClient, String adresse, String telephone, String email, double total, List<LigneCommande> lignes, LocalDateTime dateCommande) {
         this.utilisateurId = utilisateurId;
         this.nomClient = nomClient;
         this.adresse = adresse;
@@ -22,14 +25,22 @@ public class Commande {
         this.email = email;
         this.total = total;
         this.lignes = lignes;
+        this.dateCommande = dateCommande;
     }
-
    
 	
 	  public int getUtilisateurId() { return utilisateurId; }
 	  
 	  public void setUtilisateurId(int utilisateurId) { this.utilisateurId =
 	  utilisateurId; }
+	  
+	  public LocalDateTime getDateCommande() {
+		    return dateCommande;
+		}
+
+		public void setDateCommande(LocalDateTime dateCommande) {
+		    this.dateCommande = dateCommande;
+		}
 	 
 
     
